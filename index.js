@@ -19,9 +19,9 @@ app.get("/", function (req, res) {
 });
 
 
-// your first API endpoint... 
+// your first API endpoint...
+app.get( "/api/", timesStampMicroservicioActual ); 
 app.get("/api/:fecha", timesStampMicroservicio);
-app.get( "/api/", timesStampMicroservicioActual );
 
 //Objeto que se despacha
 const fechaObj = {
