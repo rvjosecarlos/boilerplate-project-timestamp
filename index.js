@@ -21,16 +21,20 @@ app.get("/", function (req, res) {
 
 // your first API endpoint... 
 app.get("/api/:fecha", timesStampMicroservicio);
+app.get( "/api/", timesStampMicroservicioActual );
 
+//Objeto que se despacha
+const fechaObj = {
+  "unix": undefined,
+  "utc": undefined
+}
 
-// Middleware para app.get("/api/")
+// Middleware para app.get("/api/:fecha")
 function timesStampMicroservicio( req, res ){
 
-  const { fecha } = req.params;
-  const fechaObj = {
-    "unix": undefined,
-    "utc": undefined
-  }
+  const { fecha } = req.params;  
+
+  console.log(fecha);
 
   const validaFecha = new Date( fecha );
 
@@ -51,6 +55,13 @@ function timesStampMicroservicio( req, res ){
 
 }
 
+// Middelware para las solicitudes vacias
+function timesStampMicroservicioActual( req, res ){
+
+    fechaObj.unix = Number( new Date() );
+    fechaObj.utc = new Date().toUTCString();
+    res.json( fechaObj );
+}
 
 
 // listen for requests :)
